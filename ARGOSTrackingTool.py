@@ -71,6 +71,10 @@ for date_item in date_dict.items():
         #If so, add the key to the list
         matching_keys.append(the_key)
         
+#If not records found, tell the user
+if len(matching_keys) == 0:
+    print("No observations on {user_date}")
+        
 #Reveal locations for each key in matching_keys
 for matching_key in matching_keys:
     obs_lat, obs_long = coord_dict[matching_key]
