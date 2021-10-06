@@ -26,6 +26,10 @@ line_list = file_object.readlines()
 #Close the file
 file_object.close()
 
+#Create two new dictionary objects
+date_dict = {}
+coord_dict = {}
+#as the loop iterates, we want to add new items to each dictionary
 
 #Iterate through all lines in the line list
 for lineString in line_list:
@@ -35,13 +39,20 @@ for lineString in line_list:
     
     #once items are parsed/split into strings, want to save as new variables
     #Extract items in list into variables
+    #Even though items look like numbers, they're actually strings
+    #Better to keep nominal data as strings
     record_id = lineData[0]
     obs_date = lineData[2]
     obs_lc = lineData[4]
+    #if obs_lc not in ("1", "2", "3"):
+    #   continue
     obs_lat = lineData[6]
     obs_long = lineData[7]
     
-    #Print location of Sara
+    #Print location of Sara if lc is 1, 2, or 3
     #f prints entire line as string
-    print(f"Record {record_id} indicates Sara was seen at lat:{obs_lat},lon:{obs_long} on {obs_date}")
+    if obs_lc in ("1", "2", "3"):
+        print(f"Record {record_id} indicates Sara was seen at lat:{obs_lat},lon:{obs_long} on {obs_date}")
+        date_dict[record_id] = obs_date
+        coord_dict[record_id] = (obs_lat,obs_long)
 
