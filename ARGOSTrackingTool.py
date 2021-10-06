@@ -14,6 +14,9 @@
 #need a string method to pull out specific characters
 #treat as a delineated file
 
+#Ask user for date
+user_date = input("Enter data to search for Sara: ")
+
 #Create a variable pointing to the data file
 file_name = './Data/Raw/Sara.txt'
 
@@ -52,7 +55,26 @@ for lineString in line_list:
     #Print location of Sara if lc is 1, 2, or 3
     #f prints entire line as string
     if obs_lc in ("1", "2", "3"):
-        print(f"Record {record_id} indicates Sara was seen at lat:{obs_lat},lon:{obs_long} on {obs_date}")
+        #print(f"Record {record_id} indicates Sara was seen at lat:{obs_lat},lon:{obs_long} on {obs_date}")
         date_dict[record_id] = obs_date
         coord_dict[record_id] = (obs_lat,obs_long)
 
+#Create empty list to hold matching keys
+matching_keys = []
+
+#Loop through items in the date_dict and collect keys for matching ones(with date)
+for date_item in date_dict.items():
+    #get the key and date of the item
+    the_key, the_date = date_item
+    #see if the date matches the user date
+    if the_date == user_date:
+        #If so, add the key to the list
+        matching_keys.append(the_key)
+        
+#Reveal locations for each key in matching_keys
+for matching_key in matching_keys:
+    obs_lat, obs_long = coord_dict[matching_key]
+    obs_date = date_dict[matching_key]
+    print(f"Record {matching_key} indicates Sara was seen at lat:{obs_lat},lon:{obs_long} on {user_date}")
+        
+    
